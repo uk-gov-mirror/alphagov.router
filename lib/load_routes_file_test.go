@@ -184,8 +184,8 @@ func TestLoadRoutesFromFile_IncludesProbeRoutes(t *testing.T) {
 		},
 		{
 			Endpoint:           "/__probe__/gone",
-			ExpectedStatus:     http.StatusGone,
-			ExpectedBody:       "410 Gone\n",
+			ExpectedStatus:     460,
+			ExpectedBody:       "460 Gone\n",
 			ExpectToHitBackend: false,
 			RedirectLocation:   nil,
 		},

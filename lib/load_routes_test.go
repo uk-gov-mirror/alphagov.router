@@ -141,7 +141,7 @@ var _ = Describe("loadRoutes", func() {
 			rr := httptest.NewRecorder()
 			mux.ServeHTTP(rr, req)
 
-			Expect(rr.Code).To(Equal(http.StatusGone))
+			Expect(rr.Code).To(Equal(460))
 		})
 
 		It("should load gone route with empty description", func() {
@@ -149,7 +149,7 @@ var _ = Describe("loadRoutes", func() {
 			rr := httptest.NewRecorder()
 			mux.ServeHTTP(rr, req)
 
-			Expect(rr.Code).To(Equal(http.StatusGone))
+			Expect(rr.Code).To(Equal(460))
 		})
 
 		It("should load gone route with nil description", func() {
@@ -157,7 +157,7 @@ var _ = Describe("loadRoutes", func() {
 			rr := httptest.NewRecorder()
 			mux.ServeHTTP(rr, req)
 
-			Expect(rr.Code).To(Equal(http.StatusGone))
+			Expect(rr.Code).To(Equal(460))
 		})
 
 		It("should load backend route with description and backend", func() {
@@ -304,8 +304,8 @@ var _ = Describe("loadRoutes", func() {
 				rr := httptest.NewRecorder()
 				mux.ServeHTTP(rr, req)
 
-				Expect(rr.Code).To(Equal(http.StatusGone))
-				Expect(rr.Body.String()).To(Equal("410 Gone\n"))
+				Expect(rr.Code).To(Equal(460))
+				Expect(rr.Body.String()).To(Equal("460 Gone\n"))
 			})
 
 			It("should load the /__probe__/router-redirect route correctly", func() {

@@ -53,9 +53,9 @@ Once a request is matched to a route, Router uses the `schemaName` property to d
 There are 3 handler types to handle a request:
 1. **backend**: Reverse proxies the request to a backend application server
 2. **redirect**: Returns an HTTP `301` redirect to a new location
-3. **gone**: Returns an HTTP `410` Gone response for deleted content
+3. **gone**: Returns an HTTP `460` Gone response for deleted content.
 
-Note: some `Gone` routes are also handled by the `backend` handler.
+Note: 460 is not the standard gone status code. Gone routes may be handled directly by router (in which case a 460 with a simple text response is sent), or they may be handled by the `backend` handler if they meet certain criteria (non-blank, non-null details values for explanation). In practise this is always Frontend, which will return a normal 410 with a full HTML error page. This is because the nginx layer intercepts the code 460 and rewrites it to 410 (and sends a nice static error page from an S3 bucket). If router sent a normal 410 status we would have to intercept that, which would prevent us sending 410 status codes for custom gone routes from Frontend (because they would then be intercepted and the custom response would be replaced with the static one).
 
 Router otherwise:
 - serves `503` if no routes are loaded
@@ -100,7 +100,7 @@ Router doesn't proxy redirect and gone routes to a backend but simply returns th
 
 ### Draft stack
 
-The [draft stack](https://docs.publishing.service.gov.uk/manual/content-preview.html) consists of 'draft' deployments of Router, 
+The [draft stack](https://docs.publishing.service.gov.uk/manual/content-preview.html) consists of 'draft' deployments of Router,
 content store and backends.
 
 Here the request passes through an [authenticating proxy](https://github.com/alphagov/authenticating-proxy/) before it hits draft router:
@@ -209,7 +209,7 @@ When run with the [router-probe-backend](https://github.com/alphagov/govuk-helm-
 
 Route                              | Provided by          | HTTP Response Expected
 -----------------------------------|----------------------|------------
-`/__probe__/gone`                  | router               | Returns 410 Gone status from internally within router
+`/__probe__/gone`                  | router               | Returns 460 Gone status from internally within router
 `/__probe__/router-redirect`       | router               | Returns 301 Moved Permenantly to `/__probe__/redirected`
 `/__probe__/ok`                    | router-probe-backend | Returns 200 OK
 `/__probe__/redirect`              | router-probe-backend | Returns 301 Moved Permenantly to `/__probe__/redirected`
