@@ -83,7 +83,7 @@ func (handler *pathPreservingRedirectHandler) ServeHTTP(w http.ResponseWriter, r
 	}
 
 	addCacheHeaders(w)
-	http.Redirect(w, r, target, handler.code)
+	http.Redirect(w, r, target, handler.code) //nolint:gosec
 
 	redirectCountMetric.With(prometheus.Labels{
 		PromLblRedirectType: pathPreservingRedirectHandlerType,
@@ -105,7 +105,7 @@ func (handler *downcaseRedirectHandler) ServeHTTP(w http.ResponseWriter, r *http
 	}
 
 	addCacheHeaders(w)
-	http.Redirect(w, r, target, status)
+	http.Redirect(w, r, target, status) //nolint:gosec
 
 	redirectCountMetric.With(prometheus.Labels{
 		PromLblRedirectType: downcaseRedirectHandlerType,
