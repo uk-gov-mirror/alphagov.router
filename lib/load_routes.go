@@ -19,6 +19,9 @@ import (
 	"github.com/alphagov/router/triemux"
 )
 
+const PromLblSuccess = "success"
+const PromLblSource = "source"
+
 //go:embed sql/routes.sql
 var loadRoutesQuery string
 
@@ -237,7 +240,7 @@ func (rt *Router) waitForReload() {
 func (rt *Router) reloadRoutes(pool PgxIface) {
 	var success bool
 	timer := prometheus.NewTimer(prometheus.ObserverFunc(func(v float64) {
-		labels := prometheus.Labels{"success": strconv.FormatBool(success), "source": "content-store"}
+		labels := prometheus.Labels{PromLblSuccess: strconv.FormatBool(success), PromLblSource: "content-store"}
 		routeReloadDurationMetric.With(labels).Observe(v)
 	}))
 

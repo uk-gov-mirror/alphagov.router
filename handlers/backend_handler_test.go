@@ -147,8 +147,8 @@ var _ = Describe("Backend handler", func() {
 		measureRequestCount := func() float64 {
 			return promtest.ToFloat64(
 				backendRequestCountMetric.With(prometheus.Labels{
-					"backend_id":     "backend-metrics",
-					"request_method": http.MethodGet,
+					PromLblBackendId:     "backend-metrics",
+					PromLblRequestMethod: http.MethodGet,
 				}),
 			)
 		}
@@ -166,13 +166,13 @@ var _ = Describe("Backend handler", func() {
 
 				foundCount := 0
 				for _, label := range metric.Label {
-					if *label.Name == "backend_id" && *label.Value == "backend-metrics" {
+					if *label.Name == PromLblBackendId && *label.Value == "backend-metrics" {
 						foundCount++
 					}
-					if *label.Name == "request_method" && *label.Value == http.MethodGet {
+					if *label.Name == PromLblRequestMethod && *label.Value == http.MethodGet {
 						foundCount++
 					}
-					if *label.Name == "response_code" && *label.Value == responseCode {
+					if *label.Name == PromLblResponseCode && *label.Value == responseCode {
 						foundCount++
 					}
 				}

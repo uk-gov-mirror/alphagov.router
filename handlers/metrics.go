@@ -11,7 +11,7 @@ var (
 			Help: "Number of redirects served by redirect handlers",
 		},
 		[]string{
-			"redirect_type",
+			PromLblRedirectType,
 		},
 	)
 
@@ -21,8 +21,8 @@ var (
 			Help: "Number of requests served by backend handlers",
 		},
 		[]string{
-			"backend_id",
-			"request_method",
+			PromLblBackendId,
+			PromLblRequestMethod,
 		},
 	)
 
@@ -32,9 +32,9 @@ var (
 			Help: "Histogram of response durations by backend",
 		},
 		[]string{
-			"backend_id",
-			"request_method",
-			"response_code",
+			PromLblBackendId,
+			PromLblRequestMethod,
+			PromLblResponseCode,
 		},
 	)
 )
