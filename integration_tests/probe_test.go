@@ -51,8 +51,8 @@ var _ = Describe("Probe routes", func() {
 		})
 		It("should respond to the /__probe__/gone route", func() {
 			resp := routerRequest(routerPort, "/__probe__/gone")
-			Expect(resp.StatusCode).To(Equal(http.StatusGone))
-			Expect(readBody(resp)).To(Equal("410 Gone\n"))
+			Expect(resp.StatusCode).To(Equal(460))
+			Expect(readBody(resp)).To(Equal("460 Gone\n"))
 		})
 
 		It("should redirect from /__probe__/router-redirect route", func() {

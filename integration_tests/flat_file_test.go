@@ -63,7 +63,7 @@ var _ = Describe("Flat File Route Loading", func() {
 
 		It("should handle gone routes", func() {
 			resp := routerRequest(3170, "/gone")
-			Expect(resp.StatusCode).To(Equal(http.StatusGone))
+			Expect(resp.StatusCode).To(Equal(460))
 		})
 
 		It("should return 404 for unknown routes", func() {

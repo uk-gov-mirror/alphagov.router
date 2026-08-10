@@ -43,4 +43,4 @@ extra fields are supported:
 
 ### `gone` handler
 
-The `gone` handler causes the Router to return a 410 response.
+The `gone` handler causes the Router to return a 460 response.

@@ -15,8 +15,8 @@ var _ = Describe("Gone routes", func() {
 
 	It("should support an exact gone route", func() {
 		resp := routerRequest(routerPort, "/foo")
-		Expect(resp.StatusCode).To(Equal(410))
-		Expect(readBody(resp)).To(Equal("410 Gone\n"))
+		Expect(resp.StatusCode).To(Equal(460))
+		Expect(readBody(resp)).To(Equal("460 Gone\n"))
 
 		resp = routerRequest(routerPort, "/foo/bar")
 		Expect(resp.StatusCode).To(Equal(404))
@@ -25,11 +25,11 @@ var _ = Describe("Gone routes", func() {
 
 	It("should support a prefix gone route", func() {
 		resp := routerRequest(routerPort, "/bar")
-		Expect(resp.StatusCode).To(Equal(410))
-		Expect(readBody(resp)).To(Equal("410 Gone\n"))
+		Expect(resp.StatusCode).To(Equal(460))
+		Expect(readBody(resp)).To(Equal("460 Gone\n"))
 
 		resp = routerRequest(routerPort, "/bar/baz")
-		Expect(resp.StatusCode).To(Equal(410))
-		Expect(readBody(resp)).To(Equal("410 Gone\n"))
+		Expect(resp.StatusCode).To(Equal(460))
+		Expect(readBody(resp)).To(Equal("460 Gone\n"))
 	})
 })

@@ -74,7 +74,7 @@ func addHandler(mux *triemux.Mux, route *Route, backends map[string]http.Handler
 		mux.Handle(incomingURL.Path, prefix, handler)
 	case HandlerTypeGone:
 		mux.Handle(incomingURL.Path, prefix, http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-			http.Error(w, "410 Gone", http.StatusGone)
+			http.Error(w, "460 Gone", 460)
 		}))
 	default:
 		logger.Warn().Interface("route", route).Str("handler_type", route.handlerType()).Msg("ignoring route with unknown handler type")
