@@ -25,7 +25,7 @@ jobs:
   build-and-publish-image:
     if: github.event_name == 'workflow_dispatch' || startsWith(github.event.release.tag_name, 'v')
     name: Build and publish image
-    uses: alphagov/govuk-infrastructure/.github/workflows/build-and-push-multiarch-image.yml@main
+    uses: alphagov/govuk-infrastructure/.github/workflows/build-and-push-multiarch-image.yml@86e24e3203c98615e0bd89b3c7ed1fe6e03e85d7 # main
     with:
       gitRef: ${{ inputs.gitRef || github.event.release.tag_name }}
     permissions:
@@ -35,7 +35,7 @@ jobs:
   trigger-deploy:
     name: Trigger deploy to ${{ inputs.environment || 'integration' }}
     needs: build-and-publish-image
-    uses: alphagov/govuk-infrastructure/.github/workflows/deploy.yml@main
+    uses: alphagov/govuk-infrastructure/.github/workflows/deploy.yml@86e24e3203c98615e0bd89b3c7ed1fe6e03e85d7 # main
     with:
       imageTag: ${{ needs.build-and-publish-image.outputs.imageTag }}
       environment: ${{ inputs.environment || 'integration' }}
